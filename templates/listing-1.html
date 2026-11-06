@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><link rel="stylesheet" href="assets/base.css">
+<style>
+#post { width: 1080px; height: 1350px; display: flex; flex-direction: column; overflow: hidden; background: #fff; color: #1C1E56; }
+.top { position: relative; width: 1080px; height: 640px; flex-shrink: 0; }
+.top img.photo { width: 1080px; height: 640px; }
+.tag { position: absolute; top: 40px; left: 40px; background: #1C1E56; color: #fff; font-size: 22px; font-weight: 600; letter-spacing: 0.16em; padding: 14px 24px; border-radius: 4px; }
+.body { flex: 1; box-sizing: border-box; padding: 52px 72px 56px; display: flex; flex-direction: column; }
+.row1 { display: flex; justify-content: space-between; align-items: center; }
+.row1 .eyebrow { font-size: 21px; color: #5F6183; }
+.row1 img { width: 140px; display: block; }
+h1 { margin: 24px 0 0; font-size: 66px; line-height: 1.1; }
+.facts { margin-top: 40px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.facts div { border-top: 2px solid #1C1E56; padding-top: 14px; }
+.facts b { display: block; font-size: 34px; font-weight: 700; }
+.facts span { display: block; font-size: 19px; color: #5F6183; margin-top: 4px; }
+.foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; }
+.price { font-size: 50px; font-weight: 700; }
+.no { font-size: 20px; color: #5F6183; }
+</style></head>
+<body>
+<div id="post">
+  <div class="top"><img class="photo" src="{{photo}}" alt=""><div class="tag">{{tag}}</div></div>
+  <div class="body">
+    <div class="row1"><div class="eyebrow">{{eyebrow}}</div><img src="assets/logo-navy.webp" alt=""></div>
+    <h1 class="serif">{{headline}}</h1>
+    <div class="facts">{{facts}}</div>
+    <div class="foot"><div class="price">{{price}}</div><div class="no">İlan No {{listing_no}}</div></div>
+  </div>
+</div>
+</body></html>

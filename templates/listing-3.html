@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><link rel="stylesheet" href="assets/base.css">
+<style>
+#post { width: 1080px; height: 1350px; display: flex; flex-direction: column; overflow: hidden; }
+.top { width: 1080px; height: 640px; flex-shrink: 0; }
+.top img.photo { width: 1080px; height: 640px; }
+.body { flex: 1; box-sizing: border-box; padding: 64px 72px 60px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.body .logo { width: 240px; display: block; }
+.rule { width: 64px; height: 1px; background: #ACADBC; margin-top: 36px; }
+.slogan { margin-top: 36px; font-size: 60px; line-height: 1.12; }
+.contact { margin-top: 40px; font-size: 26px; line-height: 1.6; color: #D6D6E0; }
+.foot { margin-top: auto; display: flex; gap: 40px; font-size: 18px; color: #ACADBC; }
+</style></head>
+<body>
+<div id="post" class="navy">
+  <div class="top"><img class="photo" src="{{photo}}" alt=""></div>
+  <div class="body">
+    <img class="logo" src="assets/logo-white.webp" alt="">
+    <div class="rule"></div>
+    <div class="slogan serif">Gayrimenkulde<br><em>Fark Yaratan</em><br><em>Deneyim.</em></div>
+    <div class="contact">0 (506) 875 49 69<br>proga.tr</div>
+    <div class="foot"><span>İlan No {{listing_no}}</span><span>Taşınmaz Ticareti Yetki Belgesi No 0601728</span></div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,14 @@
+/* PROGA social post templates. Colours from the PROGA logo and proga-theme. */
+@font-face { font-family: FIG; src: url(figtree-400.woff2) format('woff2'); font-weight: 400; }
+@font-face { font-family: FIG; src: url(figtree-600.woff2) format('woff2'); font-weight: 500 600; }
+@font-face { font-family: FIG; src: url(figtree-700.woff2) format('woff2'); font-weight: 700 800; }
+@font-face { font-family: PF; src: url(playfair.ttf) format('truetype'); font-style: normal; font-weight: 400 900; }
+@font-face { font-family: PF; src: url(playfair-italic.ttf) format('truetype'); font-style: italic; font-weight: 400 900; }
+html, body { margin: 0; padding: 0; }
+body { font-family: FIG, sans-serif; -webkit-font-smoothing: antialiased; }
+.serif { font-family: PF, Georgia, serif; font-weight: 400; }
+.serif em { font-style: italic; font-weight: 700; }
+.navy { background: linear-gradient(180deg, #1C1E56 0%, #121339 100%); color: #fff; }
+.eyebrow { font-weight: 600; letter-spacing: 0.22em; }
+/* Listing photos: the PROGA watermark sits bottom right, so photos are anchored there and never trimmed on those edges. */
+img.photo { display: block; object-fit: cover; object-position: right bottom; }
