@@ -1,0 +1,55 @@
+# Copies files from PROGA's own WordPress uploads (https://proga.tr/wp-content/uploads/...) into fetched/,
+# so the PROGA agents (whose cloud sandbox cannot reach proga.tr) can use PROGA's logos and listing photos.
+# Only proga.tr upload URLs are accepted; at most 20 files, 15 MB each.
+# Request: gh api -X POST repos/firatsekerli/proga-media/actions/workflows/fetch-files.yml/dispatches \
+#   -f ref=main -f 'inputs[urls]=https://proga.tr/wp-content/uploads/2026/10/proga-new-logo.webp ...'
+name: Fetch files
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'proga.tr upload URLs, separated by spaces'
+        required: true
+
+concurrency: fetch-files
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          mkdir -p fetched
+          n=0
+          for u in $URLS; do
+            n=$((n+1)); [ $n -le 20 ] || { echo "More than 20 URLs, rest skipped"; break; }
+            case "$u" in
+              https://proga.tr/wp-content/uploads/*) ;;
+              *) echo "Skipped (not a proga.tr upload): $u"; continue ;;
+            esac
+            path="${u#https://proga.tr/wp-content/uploads/}"
+            path="${path%%\?*}"
+            case "$path" in *..*) echo "Skipped: $u"; continue ;; esac
+            out="fetched/$path"
+            mkdir -p "$(dirname "$out")"
+            if curl -fsSL --max-time 60 --max-filesize 15728640 -A "proga-agents/1.0" -o "$out" "$u"; then
+              echo "OK $out $(stat -c %s "$out") bytes"
+            else
+              echo "FAILED $u"; rm -f "$out"
+            fi
+          done
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A fetched
+          git diff --cached --quiet && { echo "No changes"; exit 0; }
+          git commit -q -m "Fetched files $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -q
